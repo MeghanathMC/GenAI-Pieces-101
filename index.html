@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts SPA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://img.lovepik.com/bg/20240315/3D-Grey-Lively-Logos-of-Facebook-Instagram-YouTube-Snapchat-and_4052177_wh860.jpg!/fw/860') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        #app {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #ff6f61;
+            margin-bottom: 20px;
+            animation: textPop 1s ease-out;
+        }
+
+        @keyframes textPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .buttons {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            background-color: #ff6f61;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #ff3b2f;
+            transform: scale(1.05);
+        }
+
+        #facts-container {
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .fact {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fact:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .fact-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            animation: textPop 0.5s ease-out;
+        }
+
+        .fact-description {
+            color: #555;
+            line-height: 1.5;
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Crazy and Weird Facts</h1>
+        <div class="buttons">
+            <button onclick="showFacts('Instagram')">Instagram Facts</button>
+            <button onclick="showFacts('YouTube')">YouTube Facts</button>
+        </div>
+        <div id="facts-container"></div>
+    </div>
+    <script>
+        const facts = {
+            "Instagram": [
+                {
+                    "fact": "Instagram's First Post",
+                    "description": "The first-ever Instagram post was a photo of a dog and Systrom's girlfriend's foot. It was posted by co-founder Kevin Systrom on July 16, 2010."
+                },
+                {
+                    "fact": "Instagram's Logo Evolution",
+                    "description": "The original Instagram logo was a realistic-looking camera, which was later simplified to the current colorful gradient icon in 2016."
+                },
+                {
+                    "fact": "Most-Followed Egg",
+                    "description": "The @world_record_egg account, created to set the record for the most-liked Instagram post, gained millions of followers with just one post of an egg."
+                },
+                {
+                    "fact": "Instagram's Name Origin",
+                    "description": "The name 'Instagram' is a combination of 'instant camera' and 'telegram.'"
+                },
+                {
+                    "fact": "Pet Influencers",
+                    "description": "Some of the highest-earning Instagram influencers are pets, like Grumpy Cat and Jiffpom, who have millions of followers and lucrative sponsorship deals."
+                }
+            ],
+            "YouTube": [
+                {
+                    "fact": "YouTube's Original Purpose",
+                    "description": "YouTube was originally intended to be a dating site called 'Tune In Hook Up,' where users could upload videos describing their ideal partner."
+                },
+                {
+                    "fact": "First YouTube Video",
+                    "description": "The first video ever uploaded to YouTube is titled 'Me at the zoo,' featuring co-founder Jawed Karim at the San Diego Zoo. It was uploaded on April 23, 2005."
+                },
+                {
+                    "fact": "Longest Video on YouTube",
+                    "description": "The longest video on YouTube is over 596 hours long, titled 'THE LONGEST VIDEO ON YOUTUBE - 596.5 HOURS.'"
+                },
+                {
+                    "fact": "YouTube's First Headquarters",
+                    "description": "YouTube's first headquarters was above a pizzeria and Japanese restaurant in San Mateo, California."
+                },
+                {
+                    "fact": "YouTube's Billion-View Club",
+                    "description": "Psy's 'Gangnam Style' was the first video to reach one billion views on YouTube, causing the platform to upgrade its view counter system."
+                }
+            ]
+        };
+
+        function showFacts(platform) {
+            const factsContainer = document.getElementById('facts-container');
+            factsContainer.innerHTML = '';
+
+            facts[platform].forEach(item => {
+                const factDiv = document.createElement('div');
+                factDiv.className = 'fact';
+                factDiv.innerHTML = `<div class="fact-title">${item.fact}</div><div class="fact-description">${item.description}</div>`;
+                factsContainer.appendChild(factDiv);
+            });
+        }
+    </script>
+</body>
+</html>
